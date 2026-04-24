@@ -191,52 +191,30 @@
   }
 
   .hero-img-inner {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 10px;
-  position: relative; 
-}
-
-.hero-img-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.hero-img-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-  .hero-img-placeholder {
-    width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    color: var(--muted);
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-family: var(--font-head);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
   }
 
-  .hero-img-placeholder svg { opacity: 0.3; }
+  .hero-img-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
 
- .hero-badge {
-  margin-top: 30px;
-  display: inline-block;
-  padding: 8px 16px;
-  background: #ff5c35;
-  color: white;
-  font-size: 13px;
-  border-radius: 4px;
-}
+  .hero-badge {
+    margin-top: 30px;
+    display: inline-block;
+    padding: 8px 16px;
+    background: #ff5c35;
+    color: white;
+    font-size: 13px;
+    border-radius: 4px;
+  }
 
   .hero-stats {
     position: absolute;
@@ -454,6 +432,25 @@
   }
   .work-card:hover .card-thumb img { transform: scale(1.05); }
 
+  /* Video thumbnail play button overlay */
+  .card-thumb .play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.3);
+    transition: background 0.2s;
+    z-index: 1;
+  }
+  .work-card:hover .card-thumb .play-btn { background: rgba(0,0,0,0.15); }
+  .play-btn svg {
+    width: 56px; height: 56px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+    transition: transform 0.2s;
+  }
+  .work-card:hover .play-btn svg { transform: scale(1.1); }
+
   .card-thumb-placeholder {
     width: 100%; height: 100%;
     display: flex;
@@ -505,6 +502,144 @@
     font-size: 0.85rem;
     line-height: 1.6;
   }
+
+  /* ── INSTAGRAM QR CARD ── */
+  .instagram-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .instagram-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+  .ig-thumb {
+    height: 200px;
+    position: relative;
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  /* animated shimmer */
+  .ig-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.07) 50%, transparent 60%);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  .ig-qr-frame {
+    position: relative;
+    z-index: 2;
+    width: 120px;
+    height: 120px;
+    background: #fff;
+    padding: 6px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    flex-shrink: 0;
+  }
+
+  .ig-qr-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 6px;
+  }
+
+  .ig-info {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .ig-handle {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    letter-spacing: 0.03em;
+  }
+
+  .ig-scan-hint {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ig-icon {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .ig-icon svg {
+    width: 18px; height: 18px;
+    fill: #fff;
+    opacity: 0.9;
+  }
+
+  .ig-icon span {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+
+  .ig-cat {
+    position: absolute;
+    top: 16px; left: 16px;
+    z-index: 3;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .ig-arrow {
+    position: absolute;
+    bottom: 16px; right: 16px;
+    z-index: 3;
+    width: 36px; height: 36px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: white;
+    font-size: 1rem;
+    border-radius: 2px;
+  }
+  .instagram-card:hover .ig-arrow { opacity: 1; }
 
   /* ── WRITING SAMPLES ── */
   .writing-grid {
@@ -841,14 +976,12 @@
   <div class="hero-visual fade-in">
     <div class="hero-img-wrap">
       <div class="hero-img-inner">
-  <img src="IMG_5227.JPEG" alt="Sanidhya Tripathi">
-</div>
-      </div>
+        <img src="IMG_5227.JPEG" alt="Sanidhya Tripathi">
       </div>
     </div>
     <div class="hero-stats">
       <div class="stat-num">Over</div>
-<div class="stat-label">a Year in<br>Making</div>
+      <div class="stat-label">a Year in<br>Making</div>
     </div>
   </div>
 </section>
@@ -881,11 +1014,12 @@
         <em>That's the point.</em>
       </div>
       <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.8; max-width: 400px;">
-       I didn’t start in marketing. I started in HR, working closely with people, handling communication that actually needed to work, not just sound good. 
-       That’s where I learned what makes people respond.
-       At Estate Corporation, I applied that to content and marketing, writing property descriptions, ad copy, and messaging that improved lead quality and engagement.
+        I didn't start in marketing. I started in HR, working closely with people, handling communication that actually needed to work, not just sound good.
+        That's where I learned what makes people respond.
+        At Estate Corporation, I applied that to content and marketing, writing property descriptions, ad copy, and messaging that improved lead quality and engagement.
 
-        I’m now focused on building in marketing full-time, especially where messaging, audience understanding, and conversion matter.
+        I'm now focused on building in marketing full-time, especially where messaging, audience understanding, and conversion matter.
+      </p>
     </div>
     <div class="hook-right fade-in">
       <div class="hook-item">
@@ -953,40 +1087,52 @@
           <p>A professional conduct framework built from ground up, balancing legal accuracy with a tone people actually read and follow.</p>
         </div>
       </a>
-      <a href="https://www.instagram.com/reel/CmHnBtbvWNV/" target="_blank" class="work-card fade-in">
+
+      <!-- ── INSTAGRAM QR CARD ── -->
+      <a href="https://www.instagram.com/reel/CmHnBtbvWNV/" target="_blank" class="instagram-card fade-in">
+        <div class="ig-thumb">
+          <div class="ig-cat">Instagram</div>
+          <div class="ig-qr-frame">
+            <img src="sanidhya.notsure_qr.png" alt="Scan to follow on Instagram">
+          </div>
+          <div class="ig-info">
+            <div class="ig-icon">
+              <!-- Instagram SVG icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              <span>@sanidhya.notsure</span>
+            </div>
+            <div class="ig-handle">Scan to Follow</div>
+            <div class="ig-scan-hint">Point camera at QR code</div>
+          </div>
+          <div class="ig-arrow">↗</div>
+        </div>
+        <div class="card-body">
+          <h3>Instagram — Social Content</h3>
+          <p>Scan the QR to see real content in action — reels, brand storytelling, and social media work done for actual campaigns and clients.</p>
+        </div>
+      </a>
+
+      <!-- RESTAURANT / BRAND VIDEO -->
+      <a href="https://youtube.com/shorts/CkHk4JoKmlg" target="_blank" class="work-card fade-in">
         <div class="card-thumb">
-          <div class="card-thumb-placeholder"><img src="sanidhya.notsure_qr.png"></img></div>
-          <div class="card-cat">Instagram Sample</div>
+          <img src="https://img.youtube.com/vi/CkHk4JoKmlg/hqdefault.jpg" alt="Restaurant Brand Video">
+          <div class="play-btn">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="40" fill="rgba(0,0,0,0.55)"/>
+              <polygon points="32,25 60,40 32,55" fill="white"/>
+            </svg>
+          </div>
+          <div class="card-cat">Brand Content</div>
           <div class="card-arrow">↗</div>
         </div>
         <div class="card-body">
-          <h3>Instagram Sample</h3>
-          <p>A professional conduct framework built from ground up, balancing legal accuracy with a tone people actually read and follow.</p>
+          <h3>Restaurant Brand Video (Experience & Engagement)</h3>
+          <p>Worked on a promotional video designed to highlight ambience and customer experience. Focused on making the content visually engaging and platform friendly to improve brand recall and footfall.</p>
         </div>
       </a>
-<!-- RESTAURANT / BRAND VIDEO -->
-<a href="https://youtube.com/shorts/CkHk4JoKmlg" target="_blank" class="work-card fade-in">
-    
-    <div class="card-thumb">
-        <iframe 
-            src="https://www.youtube.com/embed/CkHk4JoKmlg"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
 
-        <div class="card-cat">Brand Content</div>
-    </div>
-
-    <div class="card-body">
-        <h3>Restaurant Brand Video (Experience & Engagement) </h3>
-        <p>
-            Worked on a promotional video designed to highlight ambience and customer experience. 
-            Focused on making the content visually engaging and platform friendly to improve brand recall and footfall.
-        </p>
-    </div>
-
-</a>
       <a href="https://docs.google.com/document/d/1vgzMKfn2WcVoFCNGsXda-ny-HDkvElOr/edit?usp=sharing" target="_blank" class="work-card fade-in">
         <div class="card-thumb">
           <div class="card-thumb-placeholder">🗂️</div>
@@ -999,45 +1145,42 @@
         </div>
       </a>
 
-      <!-- REPLACE href BELOW WITH YOUR REAL VIDEO LINK -->
-      <a href="https://youtu.be/hpLO8ufJRI8?si=p40IMd3UD7liHMby" target="_blank" class="work-card fade-in">
-      <div class="card-thumb">
- <iframe 
-  src="https://www.youtube.com/embed/hpLO8ufJRI8"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen>
-</iframe>
-  <div class="card-cat">Real Estate Video</div>
-</div>
+      <a href="https://youtu.be/hpLO8ufJRI8" target="_blank" class="work-card fade-in">
+        <div class="card-thumb">
+          <img src="https://img.youtube.com/vi/hpLO8ufJRI8/hqdefault.jpg" alt="Real Estate Video">
+          <div class="play-btn">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="40" fill="rgba(0,0,0,0.55)"/>
+              <polygon points="32,25 60,40 32,55" fill="white"/>
+            </svg>
+          </div>
+          <div class="card-cat">Real Estate Video</div>
+          <div class="card-arrow">↗</div>
+        </div>
         <div class="card-body">
-          <h3>Real Estate Video (Scripting, Shooting & Direction) </h3>
+          <h3>Real Estate Video (Scripting, Shooting & Direction)</h3>
           <p>End to end content execution: scripted the narrative, directed the shoot, and focused messaging on property communication that builds trust and drives enquiries.</p>
         </div>
       </a>
+
       <!-- SECOND VIDEO -->
-<a href="https://youtube.com/shorts/5SVk44qASdk" target="_blank" class="work-card fade-in">
-    
-    <div class="card-thumb">
-        <iframe 
-            src="https://www.youtube.com/embed/5SVk44qASdk"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-
-        <div class="card-cat">Brand Awareness</div>
-    </div>
-
-    <div class="card-body">
-        <h3>Brand Awareness Video —Social Cause</h3>
-        <p>
-            Created a brand led video focused on awareness and emotional connection rather than direct selling. 
-            Built relatability and trust through storytelling aligned with Estate Corporation’s positioning.
-        </p>
-    </div>
-
-</a>
+      <a href="https://youtube.com/shorts/5SVk44qASdk" target="_blank" class="work-card fade-in">
+        <div class="card-thumb">
+          <img src="https://img.youtube.com/vi/5SVk44qASdk/hqdefault.jpg" alt="Brand Awareness Video">
+          <div class="play-btn">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="40" fill="rgba(0,0,0,0.55)"/>
+              <polygon points="32,25 60,40 32,55" fill="white"/>
+            </svg>
+          </div>
+          <div class="card-cat">Brand Awareness</div>
+          <div class="card-arrow">↗</div>
+        </div>
+        <div class="card-body">
+          <h3>Brand Awareness Video — Social Cause</h3>
+          <p>Created a brand led video focused on awareness and emotional connection rather than direct selling. Built relatability and trust through storytelling aligned with Estate Corporation's positioning.</p>
+        </div>
+      </a>
 
     </div>
   </div>
@@ -1130,6 +1273,9 @@
     <a href="https://www.linkedin.com/in/sanidhya-tripathi-0333791a5" target="_blank" class="contact-link">
       🔗 LinkedIn
     </a>
+    <a href="https://www.instagram.com/sanidhya.notsure" target="_blank" class="contact-link">
+      📸 Instagram
+    </a>
   </div>
 </section>
 
@@ -1147,7 +1293,6 @@
   </div>
 </div>
 
-<!-- MODAL CONTENT DATA -->
 <script>
 const modals = {
   linkedin: {
@@ -1195,7 +1340,6 @@ const modals = {
       Exactly where Pune is moving.</p>
       <p><em>Site visits this weekend. Slots filling fast.</em><br>
       📞 Call or WhatsApp: [NUMBER]</p>
-
       <h4 style="margin-top: 32px;">WhatsApp Lead Conversion Message</h4>
       <p>Hey [Name] 👋</p>
       <p>Thanks for your interest in the Baner 2BHK.</p>
@@ -1240,7 +1384,6 @@ function switchTab(btn, tabId) {
   document.getElementById(tabId).classList.add('active');
 }
 
-// Fade in on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
@@ -1251,7 +1394,6 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Keyboard close modal
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 </body>
